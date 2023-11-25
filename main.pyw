@@ -81,6 +81,9 @@ def create_window(next_boss, end_time):
     # Fenêtre sans barre de titre standard
     window.overrideredirect(True)
 
+    # S'assurer que la fenêtre reste toujours au premier plan
+    window.attributes("-topmost", True)
+
     # Style de la fenêtre
     window.configure(bg='#A9B2C3')
     window.geometry("+100+0")
@@ -91,7 +94,7 @@ def create_window(next_boss, end_time):
 
     # Chargement de l'image du bouton de fermeture et redimensionnement
     close_img = Image.open("close_button.png")  # Assurez-vous d'avoir une image pour le bouton close
-    close_img = close_img.resize((25, 25), Image.ANTIALIAS)
+    close_img = close_img.resize((25, 25), Image.Resampling.LANCZOS)
     close_photo = ImageTk.PhotoImage(close_img)
 
     close_button = tk.Button(window, image=close_photo, command=window.destroy, bg="#A9B2C3", borderwidth=0, highlightthickness=0)
@@ -125,7 +128,7 @@ def update_boss_images(frames, boss_name):
         try:
             image_path = f"{name.replace(' ', '')}.png"
             img = Image.open(image_path)
-            img = img.resize((100, 100), Image.ANTIALIAS)
+            img = img.resize((100, 100), Image.Resampling.LANCZOS)
             img = ImageTk.PhotoImage(img)
 
             frames[i].config(image=img)
