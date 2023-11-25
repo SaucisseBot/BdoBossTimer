@@ -1,1 +1,4 @@
-pip install pytz datetime 
+
+```
+pip install pytz datetime Pillow
+```
